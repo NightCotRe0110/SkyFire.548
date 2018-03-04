@@ -171,13 +171,13 @@ ACE_Acceptor<SVC_HANDLER, PEER_ACCEPTOR>::info (ACE_TCHAR **strp,
     return -1;
   else if (addr.addr_to_string (addr_str, sizeof addr_str) == -1)
     return -1;
-
+  /*
   ACE_OS::snprintf (buf, BUFSIZ,
                     ACE_TEXT ("%s\t %s %s"),
                     ACE_TEXT ("ACE_Acceptor"),
                     addr_str,
                     ACE_TEXT ("# acceptor factory\n"));
-
+*/
   if (*strp == 0 && (*strp = ACE_OS::strdup (buf)) == 0)
     return -1;
   else
