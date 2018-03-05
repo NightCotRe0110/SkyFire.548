@@ -750,7 +750,7 @@ public:
                     uint32 tempValue = target->GetSkillTempBonusValue(id);
 
                     char const* valFormat = handler->GetSkyFireString(LANG_SKILL_VALUES);
-                    snprintf(valStr, 50, valFormat, curValue, maxValue, permValue, tempValue);
+                    _snprintf(valStr, 50, valFormat, curValue, maxValue, permValue, tempValue);
                 }
 
                 // send skill in "id - [namedlink locale]" format
@@ -1094,7 +1094,7 @@ public:
                     : "";
 
                 char titleNameStr[80];
-                snprintf(titleNameStr, 80, name.c_str(), targetName);
+                _snprintf(titleNameStr, 80, name.c_str(), targetName);
 
                 // send title in "id (idx:idx) - [namedlink locale]" format
                 if (handler->GetSession())

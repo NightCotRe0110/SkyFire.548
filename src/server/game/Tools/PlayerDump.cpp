@@ -180,7 +180,7 @@ bool changeGuid(std::string &str, int n, std::map<uint32, uint32> &guidMap, uint
         return true;                                        // not an error
 
     uint32 newGuid = registerNewGuid(oldGuid, guidMap, hiGuid);
-    snprintf(chritem, 20, "%u", newGuid);
+    _snprintf(chritem, 20, "%u", newGuid);
 
     return changenth(str, n, chritem, false, nonzero);
 }
@@ -193,7 +193,7 @@ bool changetokGuid(std::string &str, int n, std::map<uint32, uint32> &guidMap, u
         return true;                                        // not an error
 
     uint32 newGuid = registerNewGuid(oldGuid, guidMap, hiGuid);
-    snprintf(chritem, 20, "%u", newGuid);
+    _snprintf(chritem, 20, "%u", newGuid);
 
     return changetoknth(str, n, chritem, false, nonzero);
 }
@@ -447,10 +447,10 @@ DumpReturn PlayerDumpReader::LoadDump(std::string const& file, uint32 account, s
 
     // name encoded or empty
 
-    snprintf(newguid, 20, "%u", guid);
-    snprintf(chraccount, 20, "%u", account);
-    snprintf(newpetid, 20, "%u", sObjectMgr->GeneratePetNumber());
-    snprintf(lastpetid, 20, "%s", "");
+    _snprintf(newguid, 20, "%u", guid);
+    _snprintf(chraccount, 20, "%u", account);
+    _snprintf(newpetid, 20, "%u", sObjectMgr->GeneratePetNumber());
+    _snprintf(lastpetid, 20, "%s", "");
 
     std::map<uint32, uint32> items;
     std::map<uint32, uint32> mails;
@@ -576,7 +576,7 @@ DumpReturn PlayerDumpReader::LoadDump(std::string const& file, uint32 account, s
                     ROLLBACK(DUMP_FILE_BROKEN);             // character_equipmentsets.guid
 
                 char newSetGuid[24];
-                snprintf(newSetGuid, 24, UI64FMTD, sObjectMgr->GenerateEquipmentSetGuid());
+                _snprintf(newSetGuid, 24, UI64FMTD, sObjectMgr->GenerateEquipmentSetGuid());
                 if (!changenth(line, 2, newSetGuid))
                     ROLLBACK(DUMP_FILE_BROKEN);             // character_equipmentsets.setguid
                 break;
@@ -630,13 +630,13 @@ DumpReturn PlayerDumpReader::LoadDump(std::string const& file, uint32 account, s
             case DTT_PET:
             {
                 //store a map of old pet id to new inserted pet id for use by type 5 tables
-                snprintf(currpetid, 20, "%s", getnth(line, 1).c_str());
+                _snprintf(currpetid, 20, "%s", getnth(line, 1).c_str());
                 if (*lastpetid == '\0')
-                    snprintf(lastpetid, 20, "%s", currpetid);
+                    _snprintf(lastpetid, 20, "%s", currpetid);
                 if (strcmp(lastpetid, currpetid) != 0)
                 {
-                    snprintf(newpetid, 20, "%d", sObjectMgr->GeneratePetNumber());
-                    snprintf(lastpetid, 20, "%s", currpetid);
+                    _snprintf(newpetid, 20, "%d", sObjectMgr->GeneratePetNumber());
+                    _snprintf(lastpetid, 20, "%s", currpetid);
                 }
 
                 std::map<uint32, uint32> :: const_iterator petids_iter = petids.find(atoi(currpetid));
@@ -655,14 +655,14 @@ DumpReturn PlayerDumpReader::LoadDump(std::string const& file, uint32 account, s
             }
             case DTT_PET_TABLE:                             // pet_aura, pet_spell, pet_spell_cooldown
             {
-                snprintf(currpetid, 20, "%s", getnth(line, 1).c_str());
+                _snprintf(currpetid, 20, "%s", getnth(line, 1).c_str());
 
                 // lookup currpetid and match to new inserted pet id
                 std::map<uint32, uint32> :: const_iterator petids_iter = petids.find(atoi(currpetid));
                 if (petids_iter == petids.end())             // couldn't find new inserted id
                     ROLLBACK(DUMP_FILE_BROKEN);
 
-                snprintf(newpetid, 20, "%d", petids_iter->second);
+                _snprintf(newpetid, 20, "%d", petids_iter->second);
 
                 if (!changenth(line, 1, newpetid))
                     ROLLBACK(DUMP_FILE_BROKEN);
