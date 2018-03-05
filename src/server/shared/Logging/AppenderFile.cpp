@@ -47,7 +47,7 @@ void AppenderFile::_write(LogMessage const& message)
     if (dynamicName)
     {
         char namebuf[SKYFIRE_PATH_MAX];
-        snprintf(namebuf, SKYFIRE_PATH_MAX, filename.c_str(), message.param1.c_str());
+        _snprintf(namebuf, SKYFIRE_PATH_MAX, filename.c_str(), message.param1.c_str());
         logfile = OpenFile(namebuf, mode, backup || exceedMaxSize);
     }
     else if (exceedMaxSize)

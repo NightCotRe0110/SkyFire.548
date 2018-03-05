@@ -288,7 +288,7 @@ public:
                 : "";
 
                 char titleNameStr[80];
-                snprintf(titleNameStr, 80, name.c_str(), targetName);
+                _snprintf(titleNameStr, 80, name.c_str(), targetName);
 
                 // send title in "id (idx:idx) - [namedlink locale]" format
                 if (handler->GetSession())

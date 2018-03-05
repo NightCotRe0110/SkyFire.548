@@ -93,7 +93,7 @@ namespace Skyfire
                 char const* arg2str = _arg2 ? sObjectMgr->GetSkyFireString(_arg2, loc_idx) : "";
 
                 char str[2048];
-                snprintf(str, 2048, text, arg1str, arg2str);
+                _snprintf(str, 2048, text, arg1str, arg2str);
 
                 uint64 target_guid = _source  ? _source->GetGUID() : 0;
 
