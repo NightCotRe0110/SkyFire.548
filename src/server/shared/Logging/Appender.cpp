@@ -19,6 +19,7 @@
 
 #include "Appender.h"
 #include "Common.h"
+#include <cstdio>
 
 std::string LogMessage::getTimeStr(time_t time)
 {
